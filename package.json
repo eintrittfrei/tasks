@@ -2,6 +2,7 @@
   "name": "to_do_withdb",
   "packageManager": "yarn@3.2.2",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "express": "^4.18.1",
     "mongoose": "^6.5.2",
     "nodemon": "^2.0.19"

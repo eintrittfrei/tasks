@@ -14,8 +14,12 @@ mongoose.connect(dbURI, (err, db) => {
   {
     task: 'Learn something new',
     completed: false
+  },
+  {
+    task: 'fix this app',
+    completed: false
   }
-  ]).then(tasks => console.log(`${tasks.length} tasks created`))
+  ]).then(tasks => console.log(`${tasks.length} tasks created👷‍♀️`))
     .catch(err => console.log(err))
     .finally(() => mongoose.connection.close())
 })
