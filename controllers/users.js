@@ -1,15 +1,10 @@
-import User from '../models/user.js'
+const User = require('../models/user.js')
+const jwt = require('jsonwebtoken')
+const secret = process.env.SECRET
 
-async function registerUser(req, res, next) {
-  try {
-    const newUser = await User.create(req.body)
-    return res.status(200).json( { message: `Welcome ${ newUser.username }`} )
-  } catch (err) {
-    next(err)
-    console.log(err)
-  }
-}
 
-export default {
-  registerUser
-}
+
+
+
+
+
