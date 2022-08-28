@@ -7,9 +7,6 @@ const app = express()
 const startServer = async () => {
 
   try {
-
-  
-
     await mongoose.connect(dbURI)
     console.log(`💽 Mongoose DB ${ dbURI } connected`)
 
