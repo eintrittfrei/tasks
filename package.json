@@ -9,5 +9,12 @@
     "mongoose": "^6.5.2",
     "mongoose-unique-validator": "^3.1.0",
     "nodemon": "^2.0.19"
+  },
+  "type": "module",
+  "scripts": {
+    "seed": "node db/seeds.js",
+    "dev": "npx nodemon",
+    "start": "node index.js",
+    "build": "cd client && yarn && yarn build"
   }
 }

@@ -1,7 +1,6 @@
-const Task = require('../models/task.js')
+import Task from '../models/task.js'
 
-// Index Route display all Tasks 
-async function indexRoute(_req, res, next) {
+export const indexRoute = async (_req, res, next) => {
   try {
     await Task
       .find()
@@ -14,7 +13,7 @@ async function indexRoute(_req, res, next) {
 }
 
 //SHOW ROUTE
-async function tasksShow(req, res) {
+export const tasksShow = async (req, res) => {
   const taskId = req.params.id
   try {
     const task = await Task.findById(taskId)
@@ -25,11 +24,10 @@ async function tasksShow(req, res) {
   }
 }
 
-// Create Route create a task 
+// Create
 
-async function tasksCreate(req, res) {
+export const tasksCreate = async (req, res) => {
   try {
-    // console.log(JSON.stringify(req.body))
     const createdTask = await Task.create(req.body)
     if (!createdTask) throw new Error()
     res.status(201).json(createdTask)
@@ -38,8 +36,8 @@ async function tasksCreate(req, res) {
   }
 }
  
-// UPDATE ROUTE
-async function updateOne(req, res) {
+// UPDATE
+export const updateOne = async (req, res) => {
   const taskId = req.params.id
   try {
     const taskUpdate = await Task.findByIdAndUpdate(
@@ -51,22 +49,16 @@ async function updateOne(req, res) {
   }
 }
 
-// DELETE ROUTE
+// DELETE
 
-async function tasksDelete(req, res) {
-  const taskToDelete = req.params.id
+export const tasksDelete = async (req, res) =>  {
   try {
-    await Task.findByIdAndDelete(taskToDelete)
-    res.sendStatus(204).json({ message: 'Deleted Success' })
+    const { id } = req.params
+    const taskToDelete = await Task.findById(id)
+    if (!taskToDelete) throw new Error()  
+    await taskToDelete.remove()
+    return res.sendStatus(204)
   } catch (err) {
-    res.json(err)
+    return res.status(404).json({ message: 'Task not found!' })
   }
-}
-
-module.exports = {
-  index: indexRoute,
-  show: tasksShow,
-  create: tasksCreate,
-  update: updateOne,
-  delete: tasksDelete
 }

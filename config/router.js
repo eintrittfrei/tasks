@@ -1,19 +1,25 @@
-const router = require('express').Router()
-const tasks = require('../controllers/tasks')
-const users = require('../controllers/auth.js')
-// const { loginUser } = require('../controllers/users')
+import express from 'express'
+import { loginUser, registerUser, allUsers } from '../controllers/auth.js'
+import { indexRoute, tasksShow, tasksCreate, updateOne, tasksDelete } from '../controllers/tasks.js'
+import { secureRoute } from  './secureRoute.js'
+const router = express.Router()
 
 router.route('/tasks')
-  .get(tasks.index)
-  .post(tasks.create)
+  .get(indexRoute)
+  .post(secureRoute, tasksCreate)
 
 router.route('/tasks/:id')
-  .get(tasks.show)
-  .put(tasks.update)
-  .delete(tasks.delete)
+  .get(tasksShow)
+  .put(secureRoute, updateOne)
+  .delete(secureRoute ,tasksDelete)
 
 router.route('/register')
-  .post(users.create)
+  .post(registerUser)
 
+router.route('/login')
+  .post(loginUser)
 
-module.exports = router
+router.route('/users')
+  .get(allUsers)
+
+export default router

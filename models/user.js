@@ -1,6 +1,5 @@
-const mongoose = require('mongoose')
-const bcrypt = require('bcrypt')
-// const uniqueValidator = require('mongoose-unique-validator')
+import mongoose from 'mongoose'
+import bcrypt from 'bcrypt'
 
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true, maxLength: 20 },
@@ -13,7 +12,7 @@ const userSchema = new mongoose.Schema({
 
 // password confirmation schema
 userSchema
-  .virtual('passwordConfirmation') // virtual field for password confirmation so password confirm won;t go in the DB
+  .virtual('passwordConfirmation')
   .set(function(passwordConfirmation) {
     this._passwordConfirmation = passwordConfirmation
   })
@@ -36,10 +35,9 @@ userSchema
     next()
   })
 
-// Check password against passoword hash in DB
-// userSchema.methods.validatePassword = function(password) {
-//   return bcrypt.compareSync(password, this.password)
-// } 
+// Check password against passoword hash in DB for login etc. 
+userSchema.methods.validatePassword = function(password) {
+  return bcrypt.compareSync(password, this.password)
+} 
 
-// userSchema.plugin(uniqueValidator)
-module.exports = mongoose.model('User', userSchema)
+export default mongoose.model('User', userSchema)

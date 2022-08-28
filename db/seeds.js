@@ -1,7 +1,7 @@
-const mongoose = require('mongoose')
-const { dbURI } = require('../config/environment.js')
+import mongoose from 'mongoose'
+import { dbURI } from '../config/environment.js'
 
-const Task = require('../models/task.js')
+import Task from '../models/task.js'
 
 mongoose.connect(dbURI, (err, db) => {
   console.log(err)

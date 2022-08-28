@@ -1,7 +1,9 @@
-const User = require('../models/user.js')
+import User from '../models/user.js'
+import jwt from 'jsonwebtoken'
+import { secret } from '../config/environment.js'
+// const secret = 'our littel secret'
 
-// const token = jwt.sign(payload, secret, options)
-async function indexRoute(_req, res, next) {
+export const allUsers = async (_req, res, next) => {
   try {
     await User
       .find()
@@ -13,8 +15,7 @@ async function indexRoute(_req, res, next) {
   }
 }
 
-
-async function registerUser(req, res) {
+export const registerUser = async (req, res) => {
   try {
     const newUser = await User.create(req.body)
     console.log(newUser)
@@ -25,23 +26,17 @@ async function registerUser(req, res) {
   } 
 }
 
-// async function loginUser(req, res, next) {
-//   try {
-//     const userToLogin = await User.findOne({ email: req.body.email })
-//     if (!userToLogin || !userToLogin.validatePassword(req.body.password)) {
-//       throw new Error( { message: 'unauthorised' } )
-//     }
-//     const token = jwt.sign( { sub: userToLogin._id }, secret, { expiresIn: '7 days' })
-//     return res.status(202).json( { message: `Welcome back ${ userToLogin.username }`, token })
-//   } catch (err) {
-//     next(err)
-//   }
-// }
-
-
-module.exports = {
-  index: indexRoute,
-  create: registerUser
+export const loginUser = async (req, res) => {
+  try {
+    const userToLogin = await User.findOne({ email: req.body.email })
+    if (!userToLogin || !userToLogin.validatePassword(req.body.password)) {
+      throw new Error()
+    }
+    const token = jwt.sign( { sub: userToLogin._id }, secret, { expiresIn: '7 days' })
+    return res.status(202).json( { message: `Welcome back ${ userToLogin.username }`, token })
+  } catch (err) {
+    return res.status(422).json({ message: 'unauthorised' })
+  }
 }
 
 
