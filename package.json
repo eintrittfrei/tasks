@@ -2,19 +2,53 @@
   "name": "to_do_withdb",
   "packageManager": "yarn@3.2.2",
   "dependencies": {
+    "@babel/core": "^7.18.13",
+    "@babel/preset-env": "^7.18.10",
+    "babble": "^0.11.0",
     "bcrypt": "^5.0.1",
+    "cli": "^1.0.1",
+    "css": "^3.0.0",
+    "css-loader": "^6.7.1",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "html-webpack-plugin": "^5.5.0",
     "jsonwebtoken": "^8.5.1",
+    "loader": "^2.1.1",
     "mongoose": "^6.5.2",
     "mongoose-unique-validator": "^3.1.0",
-    "nodemon": "^2.0.19"
+    "nodemon": "^2.0.19",
+    "sass-loader": "^13.0.2",
+    "style": "^0.0.3",
+    "webpack": "^5.74.0",
+    "webpack-dev-server": "^4.10.0",
+    "name": "webpack-config",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js"
   },
   "type": "module",
   "scripts": {
     "seed": "node db/seeds.js",
     "dev": "npx nodemon",
     "start": "node index.js",
-    "build": "cd client && yarn && yarn build"
-  }
+    "build": "cd client && yarn && yarn build",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "webpack-dev-server --mode=development",
+    "build2": "webpack -p"
+    },
+    "author": "Mike Hayden <mickyginger@gmail.com> (https://github.com/mickyginger)",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.2.3",
+    "babel-loader": "^8.0.5",
+    "css-loader": "^2.1.0",
+    "html-webpack-plugin": "^3.2.0",
+    "node-sass": "^4.11.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.28.3",
+    "webpack-cli": "^3.2.1",
+    "webpack-dev-server": "^3.1.14"
+}
 }

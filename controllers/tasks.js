@@ -1,12 +1,9 @@
 import Task from '../models/task.js'
 
-export const indexRoute = async (_req, res, next) => {
+export const indexRoute = async (_req, res) => {
   try {
-    await Task
-      .find()
-      .exec()
-      .then(tasks => res.json(tasks))
-      .catch(next)
+    const tasks = await Task.find().populate('owner')
+    return res.status(200).json(tasks)
   } catch (err) {
     console.log(err)
   }
@@ -16,7 +13,7 @@ export const indexRoute = async (_req, res, next) => {
 export const tasksShow = async (req, res) => {
   const taskId = req.params.id
   try {
-    const task = await Task.findById(taskId)
+    const task = await Task.findById(taskId).populate('owner')
     if (!task) throw new Error()
     res.status(200).json(task)
   } catch (err) {

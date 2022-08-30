@@ -1,25 +1,38 @@
 import mongoose from 'mongoose'
 import { dbURI } from '../config/environment.js'
 
+import User from '../models/user.js'
+import users from './users.js'
 import Task from '../models/task.js'
+import tasks from './tasks.js'
 
-mongoose.connect(dbURI, (err, db) => {
-  console.log(err)
-  db.dropDatabase()
+const seededDB = async () => {
+  
+  try {
 
-  Task.create([{
-    task: 'Clean your room',
-    completed: false
-  },
-  {
-    task: 'Learn something new',
-    completed: false
-  },
-  {
-    task: 'fix this app',
-    completed: false
+    await mongoose.connect(dbURI)
+
+    await mongoose.connection.db.dropDatabase()
+    console.log('DB dropped 🥰')
+
+    const seededUsers = await User.create(users)
+    console.log(`${users.length} users created 😎`)
+    console.log('seededUsers', seededUsers)
+
+    const tasksWithAddedUser = await tasks.map(task => {
+      return { ...task, owner: seededUsers[0]._id }
+    })
+
+    const seededTasks = await Task.create(tasksWithAddedUser)
+    console.log(`${seededTasks.length} tasks created 👷‍♀️`)
+    console.log(seededTasks)
+    
+  } catch (err) {
+    console.log('Error ==>', err)
+    console.log('Something has gone wrong!')
+    await mongoose.connection.close()
+    console.log('Chiao!! 🥳')
   }
-  ]).then(tasks => console.log(`${tasks.length} tasks created👷‍♀️`))
-    .catch(err => console.log(err))
-    .finally(() => mongoose.connection.close())
-})
+}
+
+seededDB()

@@ -10,6 +10,15 @@ const userSchema = new mongoose.Schema({
   timestamps: true
 })
 
+userSchema
+  .set('toJSON', {
+    virtuals: true,
+    transform(_doc, json) {
+      delete json.password
+      return json
+    }
+  })
+
 // password confirmation schema
 userSchema
   .virtual('passwordConfirmation')

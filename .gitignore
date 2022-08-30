@@ -11,3 +11,8 @@
 #.pnp.*
 .env
 ./db
+.DS_Store
+node_modules
+.sass-cache
+*.log
+
