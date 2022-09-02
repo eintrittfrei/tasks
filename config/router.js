@@ -2,6 +2,8 @@ import express from 'express'
 import { loginUser, registerUser, allUsers } from '../controllers/auth.js'
 import { indexRoute, tasksShow, tasksCreate, updateOne, tasksDelete } from '../controllers/tasks.js'
 import { secureRoute } from  './secureRoute.js'
+import { categoryIndex } from '../controllers/category.js'
+
 const router = express.Router()
 
 router.route('/tasks')
@@ -21,5 +23,8 @@ router.route('/login')
 
 router.route('/users')
   .get(allUsers)
+
+router.route('/category')
+  .get(categoryIndex)
 
 export default router

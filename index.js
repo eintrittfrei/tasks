@@ -7,7 +7,7 @@ const app = express()
 const startServer = async () => {
 
   try {
-    await mongoose.connect(dbURI)
+    await mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
     console.log(`💽 Mongoose DB ${ dbURI } connected`)
 
     app.use((req, _res, next) => {

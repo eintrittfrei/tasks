@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import { secret } from '../config/environment.js'
+import { secret } from './environment.js'
 import User from '../models/user.js'
 
 export const secureRoute = async (req, res, next) => {
@@ -16,10 +16,10 @@ export const secureRoute = async (req, res, next) => {
     console.log('payload ==>', payload)
     // payload access to the user id
     // find user based on id in payload 
-    const userToVerify = User.findById(payload.sub)
+    const userToVerify = await User.findById(payload.sub)
     if (!userToVerify) throw new Error({ message: 'User not found 😱' })
 
-    // console.log('SecureRoute==>', userToVerify)
+    console.log('SecureRoute==>', userToVerify)
     // console.log(req.currentUser)
     req.currentUser = userToVerify
 
