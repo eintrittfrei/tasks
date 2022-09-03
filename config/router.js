@@ -1,6 +1,6 @@
 import express from 'express'
 import { loginUser, registerUser, allUsers } from '../controllers/auth.js'
-import { indexRoute, tasksShow, tasksCreate, updateOne, tasksDelete } from '../controllers/tasks.js'
+import { indexRoute, tasksShow, tasksCreate, updateOne, tasksDelete , addComment, deleteComment } from '../controllers/tasks.js'
 import { secureRoute } from  './secureRoute.js'
 import { categoryIndex } from '../controllers/category.js'
 
@@ -15,6 +15,12 @@ router.route('/tasks/:id')
   .put(secureRoute, updateOne)
   .delete(secureRoute ,tasksDelete)
 
+router.route('/tasks/:id/comments')
+  .post(secureRoute, addComment )
+
+router.route('/tasks/:id/comments/:commentId')
+  .delete(secureRoute, deleteComment)
+  
 router.route('/register')
   .post(registerUser)
 
