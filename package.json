@@ -19,7 +19,6 @@
     "nodemon": "^2.0.19",
     "sass-loader": "^13.0.2",
     "style": "^0.0.3",
-    "webpack": "^5.74.0",
     "webpack-dev-server": "^4.10.0",
     "name": "webpack-config",
     "version": "1.0.0",
@@ -35,20 +34,5 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "webpack-dev-server --mode=development",
     "build2": "webpack -p"
-    },
-    "author": "Mike Hayden <mickyginger@gmail.com> (https://github.com/mickyginger)",
-  "license": "ISC",
-  "devDependencies": {
-    "@babel/core": "^7.2.2",
-    "@babel/preset-env": "^7.2.3",
-    "babel-loader": "^8.0.5",
-    "css-loader": "^2.1.0",
-    "html-webpack-plugin": "^3.2.0",
-    "node-sass": "^4.11.0",
-    "sass-loader": "^7.1.0",
-    "style-loader": "^0.23.1",
-    "webpack": "^4.28.3",
-    "webpack-cli": "^3.2.1",
-    "webpack-dev-server": "^3.1.14"
-}
+    }
 }
