@@ -9,21 +9,21 @@
     "cli": "^1.0.1",
     "css": "^3.0.0",
     "css-loader": "^6.7.1",
+    "description": "",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "html-webpack-plugin": "^5.5.0",
     "jsonwebtoken": "^8.5.1",
     "loader": "^2.1.1",
+    "main": "index.js",
     "mongoose": "^6.5.2",
     "mongoose-unique-validator": "^3.1.0",
+    "name": "webpack-config",
     "nodemon": "^2.0.19",
     "sass-loader": "^13.0.2",
     "style": "^0.0.3",
-    "webpack-dev-server": "^4.10.0",
-    "name": "webpack-config",
     "version": "1.0.0",
-    "description": "",
-    "main": "index.js"
+    "webpack-dev-server": "^4.10.0"
   },
   "type": "module",
   "scripts": {
@@ -34,5 +34,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "webpack-dev-server --mode=development",
     "build2": "webpack -p"
-    }
+  },
+  "devDependencies": {
+    "ajv": "^8.11.0",
+    "webpack": "^5.74.0"
+  }
 }
