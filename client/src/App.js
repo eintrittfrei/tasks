@@ -1,60 +1,33 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import React from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Index from './components/index/Index'
+import Home from './components/Home'
+import Show from './components/index/Show'
+import Login from './components/auth/Login'
+import Register from './components/auth/Register'
+import Add from './components/index/Add'
 
 
 const App = () => {
 
-  const [tasks, setTasks] = useState([])
 
-useEffect(() => {
-  const getData = async () => {
-    const { data } = await axios.get('./api/tasks')
-    console.log(data)
-    setTasks(data)
-  }
- getData()
-},[])
 
-const handleChange = () => {
 
-}
+return (
 
-const taskList = (
-  <>
-  <div className='m-10'>
-    <div>
-      {tasks.map(task => {
-        if (task !== null) {
-          return (
-            <>
-              <div key={task._id} className='grid grid-cols-4 divide-x-2 divide-y-2 '>
-                <input type='checkbox' checked={task.completed} onChange={handleChange} />
-                <p className='bg-slate-700 text-white rounded-sm px-4 py-4'>{task.task}</p>
-                <p className='bg-red-400 text-white rounded-sm px-4 py-4'>{task.createdAt}</p>
-                <button className='bg-slate-700 text-white rounded-sm px-4 py-4'>Details</button>
-              </div>
-            </>
-          )
-        } return null
-      })}
-    </div>
-  </div>
-  <div key='navig'>
-    <input key='add' type="text" />
-    <button key='sub' className='bg-slate-700 text-white rounded-sm px-4 py-4'>Add</button>
-  </div>
-  </>
+  <BrowserRouter >
+    <Routes>
+      <Route path='/' element={<Home/>} />
+      <Route path='/tasks/' element={<Index/>} />
+      <Route path='/tasks/:id/' element={<Show />}/>
+      <Route path='/login' element={<Login />}/>
+      <Route path='/register' element={<Register />} />
+      <Route path='/new-task' element={<Add />} />
+    </Routes>
+  </BrowserRouter>
 )
 
 
-
-
-  return (
-    <>
-   {taskList}
-    </>
-
-  )
 }
 
 export default App

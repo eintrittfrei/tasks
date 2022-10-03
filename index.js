@@ -14,7 +14,7 @@ const startServer = async () => {
     console.log(`💽 Mongoose DB ${ dbURI } connected`)
 
     app.use((req, _res, next) => {
-      console.log(`⭐️ Incoming request: METHOD: ${req.method}, URL: ${req.url}`)
+      console.log(`⭐️ Incoming request: METHOD: ${req.method}, URL: ${req.url}, Body: ${req.body}`)
       next()
     })
     // app.use(express.static(`${__dirname}/client/build`))

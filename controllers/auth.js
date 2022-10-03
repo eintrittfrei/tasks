@@ -11,7 +11,7 @@ export const allUsers = async (_req, res, next) => {
       .then(tasks => res.json(tasks))
       .catch(next)
   } catch (err) {
-    console.log(err)
+    console.error(err)
   }
 }
 
@@ -21,7 +21,7 @@ export const registerUser = async (req, res) => {
     console.log(newUser)
     return res.status(200).json( { message: `Welcome ${ newUser.username }` } )
   } catch (err) {
-    console.log(err)
+    console.error(err)
     return res.status(422).json(err)
   } 
 }

@@ -20,6 +20,7 @@ export const tasksShow = async (req, res) => {
     const task = await Task.findById(id)
       .populate('owner')
       .populate('category')
+      .populate('comments.owner')
     if (!task) throw new Error({ message: 'not found' } )
     console.log(`Task: ${task}`)
     res.status(200).json(task)

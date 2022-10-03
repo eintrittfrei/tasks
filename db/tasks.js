@@ -1,13 +1,16 @@
 export default [{
   task: 'Clean your room',
-  completed: false
+  completed: false,
+  category: 'shopping'
 },
 {
   task: 'Learn something new',
-  completed: false
+  completed: false,
+  category: 'shopping'
 },
 {
   task: 'fix this app',
-  completed: false
+  completed: false,
+  category: 'shopping'
 }
 ]
