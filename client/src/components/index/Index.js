@@ -11,7 +11,7 @@ const Index = () => {
   useEffect(() => {
     const getData = async () => {
       const { data } = await axios.get('/api/tasks')
-      console.log(data)
+      console.table(data)
       setTasks(data)
     }
    getData()
@@ -20,16 +20,22 @@ const Index = () => {
   return (
   <>
   <Navigation />
-  <div key='wrapper_1' className='m-10'>
-    <div key='wrapper_2' >
+  <div className='flex justify-center'>
+  <table className='border rounded dark:border-slate-600 w-full text-sm m-2 max-w-xl'>
+    <thead className='bg-slate-100'>
+      <tr className=''>
+        <th className='border-b dark:border-slate-600 font-medium p-4 pl-8 text-slate-400 dark:text-slate-200 text-left'>Completed</th>
+        <th className='border-b dark:border-slate-600 font-medium p-4 pl-8 text-slate-400 dark:text-slate-200 text-left'>Task</th>
+        <th className='border-b dark:border-slate-600 font-medium p-4 pl-8 text-slate-400 dark:text-slate-200 text-left'>Date</th>
+      </tr>
+    </thead>
+    <tbody className='bg-white dark:bg-slate-800'>
       {tasks.map(task => {
         return <DisplayTasks key={task._id} {...task}/>
       })}
-      <div className='m-3'>
-      </div>
-      </div>
+      </tbody>
+  </table>
   </div>
-
   </>
   )
 

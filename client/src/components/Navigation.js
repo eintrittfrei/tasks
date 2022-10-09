@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getPayload } from './auth/Payload'
+import { getPayload, getTokenFromLocalStorage } from './auth/Payload'
+import axios from 'axios'
 
 const Nav = () => {
   const navigate = useNavigate()
-  // const [userinfo, setUserInfo] = useState([])
+  const [userinfo, setUserInfo] = useState([])
 
   const handleLogout = () => {
     window.localStorage.removeItem('token')
@@ -21,15 +22,29 @@ const Nav = () => {
   // const userId = () => {
   //   const payload = getPayload()
   //   if (!payload) return false
-  //   console.log('SUB',payload.sub)
+  //   // console.log('SUB',payload.sub)
   //   return payload.sub
   // }
 
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     const res = await axios.get()
-  //   }
-  // }) 
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+      const { data } = await axios.get('/api/profile',
+      {
+        headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}`, }
+      })
+      console.log('RES', data)
+      setUserInfo(data)
+
+     } catch (err) {
+        console.log(err)
+      }
+      
+    }
+    getData()
+  }, []) 
+  
 
   return (
     <nav className='flex justify-center space-x-4 m-5'>
@@ -42,6 +57,7 @@ const Nav = () => {
       <>
         <a href='/new-task' className='font-bold px-3 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900'>Add task</a>
         <button onClick={handleLogout} className='font-bold px-3 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900'>Logout</button>
+        <p className='font-bold px-3 py-2 text-yellow-700 rounded-lg hover:bg-slate-100 hover:text-slate-900'>Hi, {userinfo.username}</p>
       </> 
       :
       <>

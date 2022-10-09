@@ -27,7 +27,6 @@ const { id } = useParams()
     <Navigation />
       <div className='container px-4 py-4 mx-auto my-5 bg-slate-200 '>
         <div className='flex flex-col  mx-auto sm: w-10/12'>
-          {/* <div>Category: {category.name}</div> */}
           <div>{task.task}</div>
           <hr />
           <div>Created by: {owner.username}</div>

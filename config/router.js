@@ -1,5 +1,6 @@
 import express from 'express'
 import { loginUser, registerUser, allUsers } from '../controllers/auth.js'
+import { oneUser } from '../controllers/user.js'
 import { indexRoute, tasksShow, tasksCreate, updateOne, tasksDelete , addComment, deleteComment } from '../controllers/tasks.js'
 import { secureRoute } from  './secureRoute.js'
 import { categoryIndex } from '../controllers/category.js'
@@ -29,6 +30,9 @@ router.route('/login')
 
 router.route('/users')
   .get(allUsers)
+
+router.route('/profile')
+  .get(secureRoute, oneUser )
 
 router.route('/category')
   .get(categoryIndex)
